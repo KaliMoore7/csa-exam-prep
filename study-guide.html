@@ -254,7 +254,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <div class="tbl"><table>
 <tr><th>Quick filter technique</th><th>How</th></tr>
 <tr><td>Show only one value</td><td>Right-click a value in the list &gt; <strong>Show Matching</strong> (or Filter Out to exclude it)</td></tr>
-<tr><td>Column search</td><td>Click the list magnifier, type under a column. Text alone means "starts with"; <code>*email</code> means <strong>contains</strong>; <code>%email</code> means ends with.</td></tr>
+<tr><td>Column search</td><td>Click the list magnifier, type under a column. <code>*email</code> means <strong>contains</strong>, <code>email%</code> means starts with, and <code>%email</code> means ends with. Text with no wildcard runs a greater-than-or-equal search.</td></tr>
 <tr><td>Breadcrumbs</td><td>Click a breadcrumb to remove the conditions after it</td></tr>
 <tr><td>Natural Language Query</td><td>Type a plain-language phrase to filter the list</td></tr>
 </table></div>
@@ -268,23 +268,23 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <div class="dom-rule" style="background:var(--d5)"></div>
 
 <h3 id="branding">Branding, properties, and plugins</h3>
-<p><strong>System Properties &gt; Basic Configuration UI16</strong> controls the instance look, including: banner image, banner text, <strong>browser tab title</strong>, <strong>base theme</strong>, <strong>header background color</strong>, banner text color, <strong>module text color</strong>, and background and divider colors. System Properties &gt; My Company holds the company <strong>banner image</strong> and <strong>banner text</strong>.</p>
+<p><strong>System Properties &gt; Basic Configuration UI16</strong> controls the instance look, including: banner image, <strong>browser tab title</strong>, <strong>base theme</strong>, <strong>header background color</strong>, banner text color, <strong>module text color</strong>, and background and divider colors. System Properties &gt; My Company holds the company <strong>banner image</strong> and <strong>banner text</strong>.</p>
 <div class="watch"><p><strong>Watch for:</strong> default calendar, font style, startup sound, animation style, and preferred browser are not Basic Configuration UI16 settings.</p></div>
 <p>Users fix their own date and time display by setting their <strong>time zone in user preferences</strong> (gear icon). Don't change the instance time zone for one person.</p>
 <h4>Plugins</h4>
 <p>Plugins add applications or functionality. Activate them from System Definition &gt; Plugins (or All Available Applications).</p>
 <ul>
-<li>Try new features on your <strong>Personal Developer Instance</strong>, never first in production.</li>
-<li>Dependent plugins activate automatically.</li>
-<li>Most plugins <strong>cannot be deactivated</strong> once activated. Some offer demo data at activation.</li>
+<li>You can't activate a plugin directly in production. Test it on a non-production or <strong>Personal Developer Instance</strong>, then request it for production through Now Support.</li>
+<li>When a plugin depends on others, the system tells you before activation and activates the dependencies.</li>
+<li>Once activated, a plugin <strong>can't be deactivated</strong>. Some offer demo data at activation.</li>
 </ul>
 
 <h3 id="adminsec">Admin roles, high security, and impersonation</h3>
 <div class="tbl"><table>
 <tr><th>Role</th><th>Grants</th></tr>
-<tr><td><code>admin</code> (System Administrator)</td><td>Almost all features, functions, and data. Exceptions: high security settings, plus HR and Security Operations data that need their own roles.</td></tr>
+<tr><td><code>admin</code> (System Administrator)</td><td>Access to all system features, functions, and data, because admins can override ACL rules and pass all role checks. For sensitive data such as HR records, ServiceNow recommends custom admin roles instead.</td></tr>
 <tr><td><code>security_admin</code></td><td>Elevated role needed to change high security settings and ACLs. Activate it with <strong>Elevate Role</strong> from the user menu.</td></tr>
-<tr><td><code>impersonator</code></td><td>Lets a non-admin impersonate users (but not admins)</td></tr>
+<tr><td><code>impersonator</code></td><td>Lets a non-admin impersonate other users, but not admin users</td></tr>
 </table></div>
 <p>Elevation lasts for the session. To return to normal admin security, <strong>log out and back in</strong>.</p>
 <p>Common security modules: System Properties &gt; Security, System Security &gt; High Security Settings, and System Security &gt; Access Control (ACL).</p>
@@ -410,7 +410,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <ul>
 <li>A flow starts with a <strong>trigger</strong> (record, schedule, or application) and a <strong>condition</strong>.</li>
 <li><strong>Actions</strong> do the work. Common core actions: Create Record, Look Up Record, Ask for Approval, Wait for Condition.</li>
-<li>Each action's output becomes a <strong>data pill</strong>: a runtime value that stays the same for the rest of the flow. Drag data pills into later steps to reference record data.</li>
+<li>Each action's output becomes a <strong>data pill</strong>. Drag data pills into later steps to reference record data. If a later action changes a data pill's value, the new value is used for the rest of the flow.</li>
 <li>Flows handle multi-level approvals with notifications at each level.</li>
 </ul>
 <p>Advantages: less manual scripting, reduced technical debt, and smooth third-party integration through <strong>IntegrationHub spokes</strong>. Spokes are available from the <strong>ServiceNow Store</strong>. <strong>Process Automation Designer</strong> combines cross-enterprise workflows into one unified process.</p>
@@ -419,7 +419,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <p>Knowledge Management lets the organization create, categorize, review, approve, and browse information in one shared place.</p>
 <ul>
 <li>Access is controlled with <strong>user criteria</strong> on the knowledge base's <strong>Can Read</strong> and <strong>Can Contribute</strong> lists. Articles can also have their own Can Read user criteria to narrow access further.</li>
-<li>If no access is specified, <strong>any active user</strong> can read.</li>
+<li>If a knowledge base has no user criteria, <strong>all users can read it</strong> by default. Newer instances can block this with a security property, so always set Can Read.</li>
 <li>With <strong>Match All</strong> selected, a user must meet every condition (company AND department AND group).</li>
 <li>Importing articles requires <strong>Can Contribute</strong> access.</li>
 <li>Check a specific user's access with <strong>User Criteria Diagnostics</strong>.</li>
@@ -495,7 +495,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 </table></div>
 <ul>
 <li>Defining <strong>suggested relationships</strong> between CI classes makes relating CIs easier, because the platform suggests which types fit.</li>
-<li>The <strong>CI dependency view</strong> graphically shows a CI's infrastructure relationships. Hover over a connection line to see the relationship. Service desk agents use it to trace from a service to the CIs with active issues.</li>
+<li>The <strong>CI dependency view</strong> graphically shows a CI's infrastructure relationships. Right-click a relationship line and choose <strong>View Relationship Form</strong>; right-click a CI for options like View Form and View Related Tasks. Service desk agents use it to trace from a service to the CIs with active issues.</li>
 <li>On a CI form, <strong>Related Items</strong> shows the other CIs it's related to.</li>
 <li>Populate the CMDB with Discovery, Service Mapping, import sets, integrations, or manual entry.</li>
 </ul>
@@ -532,10 +532,10 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 </ol>
 <div class="key"><ul>
 <li>Never use the <strong>Default</strong> update set to move changes between instances.</li>
-<li>Not captured by default: <strong>data records</strong>, <strong>schedules</strong>, and <strong>homepages and dashboards</strong>. Add homepages manually (Homepage Admin &gt; Pages, right-click &gt; Unload Portal Page).</li>
+<li>Update sets carry configuration, not task or process data. Not captured by default: <strong>data records</strong> and <strong>homepages and content pages</strong>. Add a homepage manually (Homepage Admin &gt; Pages, right-click &gt; Unload Portal Page) or a dashboard with <strong>Unload Dashboard</strong>.</li>
 <li>Keep update sets small to reduce conflicts and make changes easier to review.</li>
 <li>Moving several at once? <strong>Batch</strong> them.</li>
-<li>Data records move with XML export and import, not update sets.</li>
+<li>Move data with import sets or XML export and import, not update sets.</li>
 </ul></div>
 </section>
 
@@ -574,7 +574,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <details class="rec"><summary>Same four variables on 80 items?</summary><p>One variable set added to every item.</p></details>
 <details class="rec"><summary>Why would a manager approval be skipped for one requester?</summary><p>The requester's user record has no manager.</p></details>
 <details class="rec"><summary>Where does action output live in a flow?</summary><p>In data pills.</p></details>
-<details class="rec"><summary>Knowledge base with no user criteria: who can read?</summary><p>Any active user.</p></details>
+<details class="rec"><summary>Knowledge base with no user criteria: who can read?</summary><p>All users, by default.</p></details>
 <details class="rec"><summary>Tool to check one user's knowledge access?</summary><p>User Criteria Diagnostics.</p></details>
 <details class="rec"><summary>Business Rule When options?</summary><p>Before, after, async, display.</p></details>
 <details class="rec"><summary>ACL to let itil users create incidents?</summary><p><code>incident.None</code>, operation create, role itil.</p></details>
@@ -583,7 +583,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <details class="rec"><summary>Blueprint for mapping IT services into ServiceNow?</summary><p>CSDM.</p></details>
 <details class="rec"><summary>Import steps in order?</summary><p>Load data, create transform map, transform, clean up.</p></details>
 <details class="rec"><summary>What happens with no coalesce field?</summary><p>Every row is inserted as a new record.</p></details>
-<details class="rec"><summary>Three things not in an update set by default?</summary><p>Data records, schedules, and homepages/dashboards.</p></details>
+<details class="rec"><summary>Two things not in an update set by default?</summary><p>Data records and homepages.</p></details>
 <details class="rec"><summary>Moving several update sets at once?</summary><p>Batch them.</p></details>
 </div>
 </section>
