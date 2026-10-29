@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSA 4-Week Study Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F7F8; --surface:#FFFFFF; --ink:#18232E; --muted:#56687A; --rule:#D6DEE3;
+  --accent:#0F6E5C; --accent-soft:#E2F1EC; --amber:#8F5300; --amber-soft:#FBF0DC;
+  --code:#EAF0EE; --client:#2F5DA8; --client-soft:#E4ECF8; --server:#0F6E5C; --server-soft:#E2F1EC;
+  --d1:#0F6E5C; --d2:#2F5DA8; --d3:#8F3B57; --d4:#B26A00; --d5:#5C5FA8; --d6:#55707F;
+  color-scheme: light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11171C; --surface:#172028; --ink:#E3E9ED; --muted:#9AAAB6; --rule:#2B3843;
+    --accent:#5CC4A8; --accent-soft:#163029; --amber:#E6AA55; --amber-soft:#2E2414;
+    --code:#1C272F; --client:#8FB2EE; --client-soft:#1A2638; --server:#5CC4A8; --server-soft:#163029;
+    --d1:#5CC4A8; --d2:#8FB2EE; --d3:#E08AA6; --d4:#E6AA55; --d5:#A9ABEE; --d6:#9DB6C4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11171C; --surface:#172028; --ink:#E3E9ED; --muted:#9AAAB6; --rule:#2B3843;
+  --accent:#5CC4A8; --accent-soft:#163029; --amber:#E6AA55; --amber-soft:#2E2414;
+  --code:#1C272F; --client:#8FB2EE; --client-soft:#1A2638; --server:#5CC4A8; --server-soft:#163029;
+  --d1:#5CC4A8; --d2:#8FB2EE; --d3:#E08AA6; --d4:#E6AA55; --d5:#A9ABEE; --d6:#9DB6C4;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 16px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.88em}
+code{background:var(--code);padding:.08em .35em;border-radius:3px;word-break:break-word}
+pre{background:var(--code);padding:14px 16px;border-radius:6px;overflow-x:auto;font:400 14px/1.55 "IBM Plex Mono",ui-monospace,monospace;margin:14px 0}
+pre code{background:none;padding:0;font-size:inherit}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:48px;padding:0 24px}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100vh;overflow-y:auto;padding:36px 0 36px;font-size:14.5px}
+nav.toc p{margin:0 0 10px;color:var(--muted);font-weight:500}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li{margin:0}
+nav.toc a{display:block;padding:5px 0 5px 12px;color:var(--ink);text-decoration:none;border-left:2px solid var(--rule)}
+nav.toc a:hover{border-left-color:var(--accent);color:var(--accent)}
+nav.toc .sub a{padding-left:24px;color:var(--muted);font-size:13.5px}
+main{max-width:46rem;padding:40px 0 96px;min-width:0}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:0}nav.toc{position:static;max-height:none;padding:24px 0 0;border-bottom:1px solid var(--rule);padding-bottom:20px}main{padding-top:24px}}
+
+header.hero h1{font-size:clamp(2rem,4.6vw,2.9rem);line-height:1.1;font-weight:600;letter-spacing:-.015em;margin:0 0 14px}
+header.hero .lede{font-size:1.12rem;color:var(--muted);margin:0 0 26px;max-width:40rem}
+.weights{margin:0 0 8px}
+.wbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:2px}
+.wbar span{display:block}
+.wlegend{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 18px;margin:12px 0 0;padding:0;list-style:none;font-size:14.5px}
+.wlegend li{display:flex;align-items:baseline;gap:8px}
+.wlegend i{width:10px;height:10px;border-radius:2px;flex:none;transform:translateY(1px)}
+.wlegend b{font-weight:600;margin-left:auto;font-variant-numeric:tabular-nums}
+.small{font-size:14px;color:var(--muted)}
+
+section{margin-top:64px}
+h2{font-size:1.65rem;line-height:1.2;font-weight:600;margin:0 0 6px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2 .wt{font-size:.95rem;font-weight:500;color:var(--muted)}
+.dom-rule{height:4px;width:56px;border-radius:2px;margin:0 0 18px}
+h3{font-size:1.18rem;font-weight:600;margin:38px 0 8px;line-height:1.3}
+h4{font-size:1rem;font-weight:600;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:1.3em}
+li{margin:4px 0}
+li::marker{color:var(--muted)}
+
+.tbl{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--rule)}
+tr:last-child td{border-bottom:none}
+th{font-weight:600;background:var(--paper)}
+td.y{color:var(--accent);font-weight:600}
+td.n{color:var(--muted)}
+
+.key,.watch{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 6px 6px 0;margin:18px 0}
+.watch{border-left-color:var(--amber);background:var(--amber-soft)}
+.key p:last-child,.watch p:last-child,.key ul:last-child,.watch ul:last-child{margin-bottom:0}
+.watch strong:first-child{color:var(--amber)}
+
+.tag{display:inline-block;font-size:12.5px;font-weight:500;padding:1px 8px;border-radius:10px;white-space:nowrap;vertical-align:1px}
+.tag.c{background:var(--client-soft);color:var(--client)}
+.tag.s{background:var(--server-soft);color:var(--server)}
+
+/* client/server map */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:8px;overflow:hidden;margin:18px 0 24px;border:1px solid var(--rule)}
+.split > div{background:var(--surface);padding:16px 18px}
+.split h4{margin:0 0 4px}
+.split .c h4{color:var(--client)} .split .s h4{color:var(--server)}
+.split ul{margin:8px 0 0;padding-left:1.1em;font-size:15px}
+.split .bridge{grid-column:1 / -1;background:var(--paper);font-size:14.5px;text-align:center;padding:10px 14px}
+@media (max-width:560px){.split{grid-template-columns:1fr}}
+
+/* acl ladder */
+.ladder{list-style:none;padding:0;margin:14px 0 22px;counter-reset:l}
+.ladder li{counter-increment:l;display:flex;gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.ladder li::before{content:counter(l);font:500 13px "IBM Plex Mono",monospace;color:var(--accent);min-width:1.4em}
+.ladder code{flex:none}
+
+details.rec{border-bottom:1px solid var(--rule);padding:0}
+details.rec summary{cursor:pointer;padding:12px 2px;list-style:none;display:flex;gap:12px;align-items:baseline}
+details.rec summary::-webkit-details-marker{display:none}
+details.rec summary::before{content:"+";font:500 16px "IBM Plex Mono",monospace;color:var(--accent);width:1em;flex:none}
+details.rec[open] summary::before{content:"−"}
+details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
+.recall-top{border-top:1px solid var(--rule)}
+.actions{display:flex;gap:10px;margin:0 0 12px}
+.actions button{font:500 14px "IBM Plex Sans",sans-serif;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:6px 12px;cursor:pointer}
+.actions button:hover{border-color:var(--accent);color:var(--accent)}
+
+@media print{
+  :root{--paper:#fff;--surface:#fff}
+  nav.toc,.actions{display:none}
+  .wrap{display:block}
+  main{max-width:none;padding:0}
+  section{margin-top:32px;break-inside:auto}
+  h2,h3{break-after:avoid}
+  .tbl,.key,.watch,pre{break-inside:avoid}
+  details.rec{display:block} details.rec p{display:block}
+}
+</style>
+<style>
+.plan main{max-width:48rem;margin:0 auto}
+.week{border:1px solid var(--rule);background:var(--surface);border-radius:8px;padding:20px 22px;margin:22px 0}
+.week h2{margin-bottom:2px}
+.week .goal{color:var(--muted);margin:0 0 14px}
+.days{list-style:none;padding:0;margin:0}
+.days li{display:grid;grid-template-columns:7.5rem 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--rule);margin:0}
+.days li b{font-weight:600}
+.check{margin:14px 0 0;padding:12px 14px;background:var(--accent-soft);border-radius:6px;font-size:15.5px}
+.check strong{color:var(--accent)}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 0}
+.links a{display:inline-block;padding:9px 16px;border:1px solid var(--accent);border-radius:6px;text-decoration:none;font-weight:500}
+@media (max-width:560px){.days li{grid-template-columns:1fr;gap:2px}}
+@media print{main{max-width:none!important;padding:0!important}body{font-size:13px;line-height:1.5}section{margin-top:22px}h1{font-size:28px}.week{break-inside:avoid}}
+</style>
+</head>
+<body class="plan">
+<main style="padding:40px 24px 96px">
+<header class="hero">
+<h1>Pass the CSA in 4 weeks</h1>
+<p class="lede">A week-by-week plan built around the ServiceNow Administration Fundamentals e-book. Plan on about 1.5 to 2 hours a day, five or six days a week.</p>
+<div class="links"><a href="study-guide.html">Study guide</a><a href="practice-exam.html">Practice exam</a><a href="pdf/CSA-Study-Kit.pdf">Download PDF</a></div>
+</header>
+
+<section aria-labelledby="h-rules">
+<h2 id="h-rules">Ground rules</h2>
+<ul>
+<li><strong>The e-book is the source of truth.</strong> There are no questions on the exam that aren’t covered in the book. Read all of it.</li>
+<li><strong>Take detailed notes.</strong> Writing or typing them yourself is what makes the material stick.</li>
+<li><strong>Study by weight.</strong> Database Management (27%), Collaboration (20%), and Self-Service &amp; Automation (20%) make up two-thirds of the exam.</li>
+<li><strong>Use practice questions to find gaps, not to memorize.</strong> Real exam questions change. Understanding beats recognition.</li>
+<li><strong>Get a Personal Developer Instance</strong> at developer.servicenow.com before day 1.</li>
+</ul>
+</section>
+
+<section class="week" aria-labelledby="w1">
+<h2 id="w1">Week 1: Read and take notes</h2>
+<p class="goal">Get through the first half of the e-book. Skip the labs for now; this week is about understanding.</p>
+<ul class="days">
+<li><b>Days 1 to 5</b><span>Read at least 2 modules a day and take detailed notes. Write down every table name, role, and module path you see.</span></li>
+<li><b>Day 6</b><span>Reread your notes. Turn the facts you keep forgetting into flash cards.</span></li>
+<li><b>Day 7</b><span>Rest.</span></li>
+</ul>
+<div class="check"><strong>End of week check:</strong> you can explain the difference between a user, group, and role, and between a list and a form, without looking.</div>
+</section>
+
+<section class="week" aria-labelledby="w2">
+<h2 id="w2">Week 2: Finish the book, then do the labs</h2>
+<p class="goal">Finish reading, then put your hands on the platform.</p>
+<ul class="days">
+<li><b>Days 1 to 3</b><span>Finish reading the remaining modules with the same note-taking. Read the "Note" boxes and lists closely; tricky questions often come from them.</span></li>
+<li><b>Days 4 and 5</b><span>Start the labs in your PDI. Challenge yourself not to use the step-by-step guide; open it only when you’re stuck.</span></li>
+<li><b>Day 6</b><span>Continue the labs. Redo any lab you needed the guide for.</span></li>
+<li><b>Day 7</b><span>Rest.</span></li>
+</ul>
+<div class="check"><strong>End of week check:</strong> you’ve read every module and started the labs.</div>
+</section>
+
+<section class="week" aria-labelledby="w3">
+<h2 id="w3">Week 3: Labs and the blueprint</h2>
+<p class="goal">Finish every lab, then aim your study at the heaviest domains.</p>
+<ul class="days">
+<li><b>Days 1 and 2</b><span>Finish all remaining labs without the step-by-step guide.</span></li>
+<li><b>Day 3</b><span>Print the exam blueprint. Rate yourself 1 to 5 on each domain. Read the Database Management section of the study guide and build a table, a relationship, and an ACL in your PDI.</span></li>
+<li><b>Day 4</b><span>Study guide: Collaboration and Self-Service &amp; Automation. Build a catalog item with a variable set, and a flow with an approval.</span></li>
+<li><b>Day 5</b><span>Study guide: Data Migration, Instance Configuration, and Navigation. Import a small spreadsheet with a transform map and a coalesce field.</span></li>
+<li><b>Day 6</b><span>Visit developer.servicenow.com: work through the admin learning plan topics you rated lowest, and skim the ServiceNow glossary to get comfortable with the lingo.</span></li>
+<li><b>Day 7</b><span>Rest.</span></li>
+</ul>
+<div class="check"><strong>End of week check:</strong> no domain is rated below 3, and you’ve done each high-weight task in a PDI at least once.</div>
+</section>
+
+<section class="week" aria-labelledby="w4">
+<h2 id="w4">Week 4: Practice, fix gaps, review</h2>
+<p class="goal">Test under exam conditions and close the gaps you find.</p>
+<ul class="days">
+<li><b>Day 1</b><span>Take a timed exam simulation (60 questions, 90 minutes) with answers hidden. Note your weakest domains.</span></li>
+<li><b>Day 2</b><span>Go back to the e-book and your notes for your two weakest domains. Practice them in your PDI. Then do single-domain practice for each.</span></li>
+<li><b>Day 3</b><span>Take a second timed simulation. Retake every missed question and look up why the right answer is right.</span></li>
+<li><b>Day 4</b><span>Work through the full question bank with answers shown, a domain at a time.</span></li>
+<li><b>Day 5</b><span>Final simulation. Review the study guide’s table names and rapid-fire recall. Aim for 85% or higher before you sit the exam.</span></li>
+<li><b>Day 6</b><span>Light review of flash cards only. Sleep well.</span></li>
+<li><b>Day 7</b><span>Exam day. Read every question carefully, and select exactly as many answers as it asks for.</span></li>
+</ul>
+</section>
+
+<section aria-labelledby="h-habits">
+<h2 id="h-habits">Habits that help</h2>
+<ul>
+<li><strong>Find a study group or accountability partner.</strong> Explaining a topic to someone else is the fastest way to find out whether you really know it.</li>
+<li><strong>Make flash cards</strong> for table names, roles, and module paths.</li>
+<li><strong>Take breaks.</strong> Short breaks every 45 to 50 minutes keep your focus sharp.</li>
+<li><strong>Reward yourself</strong> when you hit a weekly checkpoint, and set a consequence if you skip a day.</li>
+<li><strong>Behind schedule?</strong> Don’t skip reading to get to practice questions. Push the exam date instead.</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

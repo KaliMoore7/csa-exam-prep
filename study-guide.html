@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSA Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F7F8; --surface:#FFFFFF; --ink:#18232E; --muted:#56687A; --rule:#D6DEE3;
+  --accent:#0F6E5C; --accent-soft:#E2F1EC; --amber:#8F5300; --amber-soft:#FBF0DC;
+  --code:#EAF0EE; --client:#2F5DA8; --client-soft:#E4ECF8; --server:#0F6E5C; --server-soft:#E2F1EC;
+  --d1:#0F6E5C; --d2:#2F5DA8; --d3:#8F3B57; --d4:#B26A00; --d5:#5C5FA8; --d6:#55707F;
+  color-scheme: light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11171C; --surface:#172028; --ink:#E3E9ED; --muted:#9AAAB6; --rule:#2B3843;
+    --accent:#5CC4A8; --accent-soft:#163029; --amber:#E6AA55; --amber-soft:#2E2414;
+    --code:#1C272F; --client:#8FB2EE; --client-soft:#1A2638; --server:#5CC4A8; --server-soft:#163029;
+    --d1:#5CC4A8; --d2:#8FB2EE; --d3:#E08AA6; --d4:#E6AA55; --d5:#A9ABEE; --d6:#9DB6C4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11171C; --surface:#172028; --ink:#E3E9ED; --muted:#9AAAB6; --rule:#2B3843;
+  --accent:#5CC4A8; --accent-soft:#163029; --amber:#E6AA55; --amber-soft:#2E2414;
+  --code:#1C272F; --client:#8FB2EE; --client-soft:#1A2638; --server:#5CC4A8; --server-soft:#163029;
+  --d1:#5CC4A8; --d2:#8FB2EE; --d3:#E08AA6; --d4:#E6AA55; --d5:#A9ABEE; --d6:#9DB6C4;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 16px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.88em}
+code{background:var(--code);padding:.08em .35em;border-radius:3px;word-break:break-word}
+pre{background:var(--code);padding:14px 16px;border-radius:6px;overflow-x:auto;font:400 14px/1.55 "IBM Plex Mono",ui-monospace,monospace;margin:14px 0}
+pre code{background:none;padding:0;font-size:inherit}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:48px;padding:0 24px}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100vh;overflow-y:auto;padding:36px 0 36px;font-size:14.5px}
+nav.toc p{margin:0 0 10px;color:var(--muted);font-weight:500}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li{margin:0}
+nav.toc a{display:block;padding:5px 0 5px 12px;color:var(--ink);text-decoration:none;border-left:2px solid var(--rule)}
+nav.toc a:hover{border-left-color:var(--accent);color:var(--accent)}
+nav.toc .sub a{padding-left:24px;color:var(--muted);font-size:13.5px}
+main{max-width:46rem;padding:40px 0 96px;min-width:0}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:0}nav.toc{position:static;max-height:none;padding:24px 0 0;border-bottom:1px solid var(--rule);padding-bottom:20px}main{padding-top:24px}}
+
+header.hero h1{font-size:clamp(2rem,4.6vw,2.9rem);line-height:1.1;font-weight:600;letter-spacing:-.015em;margin:0 0 14px}
+header.hero .lede{font-size:1.12rem;color:var(--muted);margin:0 0 26px;max-width:40rem}
+.weights{margin:0 0 8px}
+.wbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:2px}
+.wbar span{display:block}
+.wlegend{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 18px;margin:12px 0 0;padding:0;list-style:none;font-size:14.5px}
+.wlegend li{display:flex;align-items:baseline;gap:8px}
+.wlegend i{width:10px;height:10px;border-radius:2px;flex:none;transform:translateY(1px)}
+.wlegend b{font-weight:600;margin-left:auto;font-variant-numeric:tabular-nums}
+.small{font-size:14px;color:var(--muted)}
+
+section{margin-top:64px}
+h2{font-size:1.65rem;line-height:1.2;font-weight:600;margin:0 0 6px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2 .wt{font-size:.95rem;font-weight:500;color:var(--muted)}
+.dom-rule{height:4px;width:56px;border-radius:2px;margin:0 0 18px}
+h3{font-size:1.18rem;font-weight:600;margin:38px 0 8px;line-height:1.3}
+h4{font-size:1rem;font-weight:600;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:1.3em}
+li{margin:4px 0}
+li::marker{color:var(--muted)}
+
+.tbl{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--rule)}
+tr:last-child td{border-bottom:none}
+th{font-weight:600;background:var(--paper)}
+td.y{color:var(--accent);font-weight:600}
+td.n{color:var(--muted)}
+
+.key,.watch{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 6px 6px 0;margin:18px 0}
+.watch{border-left-color:var(--amber);background:var(--amber-soft)}
+.key p:last-child,.watch p:last-child,.key ul:last-child,.watch ul:last-child{margin-bottom:0}
+.watch strong:first-child{color:var(--amber)}
+
+.tag{display:inline-block;font-size:12.5px;font-weight:500;padding:1px 8px;border-radius:10px;white-space:nowrap;vertical-align:1px}
+.tag.c{background:var(--client-soft);color:var(--client)}
+.tag.s{background:var(--server-soft);color:var(--server)}
+
+/* client/server map */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:8px;overflow:hidden;margin:18px 0 24px;border:1px solid var(--rule)}
+.split > div{background:var(--surface);padding:16px 18px}
+.split h4{margin:0 0 4px}
+.split .c h4{color:var(--client)} .split .s h4{color:var(--server)}
+.split ul{margin:8px 0 0;padding-left:1.1em;font-size:15px}
+.split .bridge{grid-column:1 / -1;background:var(--paper);font-size:14.5px;text-align:center;padding:10px 14px}
+@media (max-width:560px){.split{grid-template-columns:1fr}}
+
+/* acl ladder */
+.ladder{list-style:none;padding:0;margin:14px 0 22px;counter-reset:l}
+.ladder li{counter-increment:l;display:flex;gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.ladder li::before{content:counter(l);font:500 13px "IBM Plex Mono",monospace;color:var(--accent);min-width:1.4em}
+.ladder code{flex:none}
+
+details.rec{border-bottom:1px solid var(--rule);padding:0}
+details.rec summary{cursor:pointer;padding:12px 2px;list-style:none;display:flex;gap:12px;align-items:baseline}
+details.rec summary::-webkit-details-marker{display:none}
+details.rec summary::before{content:"+";font:500 16px "IBM Plex Mono",monospace;color:var(--accent);width:1em;flex:none}
+details.rec[open] summary::before{content:"−"}
+details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
+.recall-top{border-top:1px solid var(--rule)}
+.actions{display:flex;gap:10px;margin:0 0 12px}
+.actions button{font:500 14px "IBM Plex Sans",sans-serif;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:6px 12px;cursor:pointer}
+.actions button:hover{border-color:var(--accent);color:var(--accent)}
+
+@media print{
+  :root{--paper:#fff;--surface:#fff}
+  nav.toc,.actions{display:none}
+  .wrap{display:block}
+  main{max-width:none;padding:0}
+  section{margin-top:32px;break-inside:auto}
+  h2,h3{break-after:avoid}
+  .tbl,.key,.watch,pre{break-inside:avoid}
+  details.rec{display:block} details.rec p{display:block}
+}
+@media print{main{max-width:none!important;padding:0!important}body{font-size:13px;line-height:1.5}section{margin-top:22px}h1{font-size:28px}.week{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#start">Before you start</a></li>
+<li><a href="#runs">Client vs. server</a></li>
+<li><a href="#nav">1. Platform overview &amp; navigation</a></li>
+<li class="sub"><a href="#ui">Interfaces &amp; the banner</a></li>
+<li class="sub"><a href="#lists">Lists &amp; filters</a></li>
+<li><a href="#inst">2. Instance configuration</a></li>
+<li class="sub"><a href="#branding">Branding &amp; plugins</a></li>
+<li class="sub"><a href="#adminsec">Admin roles &amp; impersonation</a></li>
+<li class="sub"><a href="#forms">Forms &amp; UI Policies</a></li>
+<li><a href="#collab">3. Applications for collaboration</a></li>
+<li class="sub"><a href="#users">Users, groups &amp; roles</a></li>
+<li class="sub"><a href="#tasks">Tasks &amp; assignment</a></li>
+<li class="sub"><a href="#notif">Notifications</a></li>
+<li class="sub"><a href="#reports">Reporting &amp; Performance Analytics</a></li>
+<li><a href="#self">4. Self-service &amp; automation</a></li>
+<li class="sub"><a href="#catalog">Service Catalog</a></li>
+<li class="sub"><a href="#flow">Flow Designer</a></li>
+<li class="sub"><a href="#kb">Knowledge Management</a></li>
+<li class="sub"><a href="#scripts">Scripting basics</a></li>
+<li><a href="#db">5. Database management</a></li>
+<li class="sub"><a href="#tables">Tables &amp; relationships</a></li>
+<li class="sub"><a href="#acl">Access Controls</a></li>
+<li class="sub"><a href="#policies">Data Policies</a></li>
+<li class="sub"><a href="#cmdb">CMDB &amp; CSDM</a></li>
+<li><a href="#data">6. Data migration &amp; integration</a></li>
+<li class="sub"><a href="#imports">Import Sets</a></li>
+<li class="sub"><a href="#updatesets">Update Sets</a></li>
+<li><a href="#tablenames">Table names to memorize</a></li>
+<li><a href="#recall">Rapid-fire recall</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero" id="start">
+<h1>ServiceNow Certified System Administrator study guide</h1>
+<p class="lede">Organized by the CSA exam blueprint, with the distinctions the exam actually tests: which module, which table, which role, and which tempting answer is wrong.</p>
+<div class="weights" aria-label="Exam domain weights">
+<div class="wbar" aria-hidden="true">
+<span style="flex:7;background:var(--d6)"></span><span style="flex:11;background:var(--d5)"></span><span style="flex:20;background:var(--d2)"></span><span style="flex:20;background:var(--d4)"></span><span style="flex:27;background:var(--d1)"></span><span style="flex:15;background:var(--d3)"></span>
+</div>
+<ul class="wlegend">
+<li><i style="background:var(--d6)"></i>Platform overview &amp; navigation<b>7%</b></li>
+<li><i style="background:var(--d5)"></i>Instance configuration<b>11%</b></li>
+<li><i style="background:var(--d2)"></i>Applications for collaboration<b>20%</b></li>
+<li><i style="background:var(--d4)"></i>Self-service &amp; automation<b>20%</b></li>
+<li><i style="background:var(--d1)"></i>Database management<b>27%</b></li>
+<li><i style="background:var(--d3)"></i>Data migration &amp; integration<b>15%</b></li>
+</ul>
+</div>
+<p class="small">60 questions in 90 minutes. Database Management alone is more than a quarter of the exam. Expect "choose two" and "choose three" questions; select exactly that many. Confirm the current blueprint on ServiceNow University before you book.</p>
+</header>
+
+<section aria-labelledby="h-how">
+<h2 id="h-how">How to use this guide</h2>
+<p>This guide is a companion to the ServiceNow Administration Fundamentals e-book, not a replacement for it. Everything on the exam is covered in that book. Use this guide to check your understanding after each module and to drill the details the exam likes to test.</p>
+<div class="watch"><p><strong>Watch for:</strong> boxes like this mark distractors and traps that show up again and again.</p></div>
+<div class="key"><p><strong>Key point:</strong> boxes like this mark facts you should be able to recall cold.</p></div>
+<p>Do everything you read about in a Personal Developer Instance (PDI). Clicking through a module once is worth more than reading about it three times.</p>
+</section>
+
+<section id="runs" aria-labelledby="h-runs">
+<h2 id="h-runs">Client vs. server</h2>
+<p>Knowing where something runs eliminates wrong answers fast.</p>
+<div class="split">
+<div class="c"><h4>Client side (the browser)</h4>
+<p class="small" style="margin:0">Controls forms and fields as the user works</p>
+<ul><li>Client Scripts (onLoad, onChange, onSubmit, onCellEdit)</li><li>UI Policies</li><li>Catalog Client Scripts and Catalog UI Policies</li></ul></div>
+<div class="s"><h4>Server side (the instance)</h4>
+<p class="small" style="margin:0">Controls data no matter how it arrives</p>
+<ul><li>Business Rules</li><li>Data Policies</li><li>Access Control (ACL) scripts</li><li>Flows, Script Includes, transform maps</li></ul></div>
+<div class="bridge">A <strong>UI Policy</strong> only affects data entered on a form. A <strong>Data Policy</strong> applies to forms, import sets, and web services alike.</div>
+</div>
+</section>
+
+<!-- 1 -->
+<section id="nav" aria-labelledby="h-nav">
+<h2 id="h-nav">1. Platform overview and navigation <span class="wt">7%</span></h2>
+<div class="dom-rule" style="background:var(--d6)"></div>
+<p>ServiceNow is a cloud platform. Scripting uses <strong>JavaScript</strong>. Response time for a user is the <strong>round trip</strong> between client and server: a <strong>request</strong> plus a <strong>response</strong>.</p>
+
+<h3 id="ui">Interfaces and the banner</h3>
+<p>The platform includes three main interfaces: the <strong>Now Platform user interface</strong> (UI16 / Next Experience), <strong>Service Portal</strong>, and the <strong>Now Mobile</strong> apps.</p>
+<div class="tbl"><table>
+<tr><th>Banner item</th><th>What it does</th></tr>
+<tr><td>Instance logo</td><td>Returns you to your home page</td></tr>
+<tr><td>Global search</td><td>Searches across the instance</td></tr>
+<tr><td>Connect (chat bubbles)</td><td>Opens Connect chat. The full-screen view is <strong>Connect &gt; Connect Workspace</strong>.</td></tr>
+<tr><td>Help (question mark)</td><td>Help panel: guided tours, docs, and help on inputs and outputs in a flow</td></tr>
+<tr><td>Gear (settings)</td><td>User preferences: theme, <strong>time zone</strong>, and turning on the <strong>application picker</strong> and <strong>update set picker</strong></td></tr>
+<tr><td>User menu</td><td><strong>Impersonate user</strong>, Elevate role, Log out</td></tr>
+</table></div>
+
+<h4>Application Navigator</h4>
+<ul>
+<li><strong>Applications</strong> are top-level menus; <strong>modules</strong> are the links inside them.</li>
+<li><strong>Favorites</strong> (star): create them by dragging a record or list into the navigator, or from a form's additional actions menu. Edit a favorite's label with the <strong>pencil</strong> icon.</li>
+<li><strong>History</strong> (clock): return to something you viewed recently.</li>
+<li>Type in the filter box to narrow the navigator. <code>table_name.list</code> opens a list; <code>table_name.form</code> or <code>table_name.do</code> opens a new form; typing it in capitals opens a new tab.</li>
+</ul>
+
+<h4>Form header icons</h4>
+<ul>
+<li><strong>Additional actions</strong> (three-bar icon, sometimes called the hamburger): the form context menu. You can also right-click the header.</li>
+<li><strong>More options (…)</strong>: tags, and toggling the template bar.</li>
+<li>Paperclip: attachments.</li>
+</ul>
+
+<h3 id="lists">Lists and filters</h3>
+<p>A <strong>list</strong> shows many records; each row is a record and each <strong>column is a field</strong>. A <strong>form</strong> shows one record.</p>
+<div class="key"><ul>
+<li>A filter condition has three parts: <strong>field</strong>, <strong>operator</strong>, and <strong>value</strong>. The operator is always a choice list.</li>
+<li>The fields offered depend on the table, the columns on it, and the user's access rights.</li>
+<li>Build two conditions that must both be true with <strong>AND</strong>, then click <strong>Run</strong>. OR means either can match.</li>
+</ul></div>
+<div class="tbl"><table>
+<tr><th>Quick filter technique</th><th>How</th></tr>
+<tr><td>Show only one value</td><td>Right-click a value in the list &gt; <strong>Show Matching</strong> (or Filter Out to exclude it)</td></tr>
+<tr><td>Column search</td><td>Click the list magnifier, type under a column. Text alone means "starts with"; <code>*email</code> means <strong>contains</strong>; <code>%email</code> means ends with.</td></tr>
+<tr><td>Breadcrumbs</td><td>Click a breadcrumb to remove the conditions after it</td></tr>
+<tr><td>Natural Language Query</td><td>Type a plain-language phrase to filter the list</td></tr>
+</table></div>
+<h4>Context menus and tags</h4>
+<p>Open a context menu by <strong>right-clicking</strong> a list, form header, or column heading, or by clicking the <strong>context menu icon</strong>. Tags can be added from More options (…) &gt; Add Tag. Tag visibility can be <strong>Everyone</strong>, <strong>Groups and users</strong>, or <strong>Me</strong>.</p>
+</section>
+
+<!-- 2 -->
+<section id="inst" aria-labelledby="h-inst">
+<h2 id="h-inst">2. Instance configuration <span class="wt">11%</span></h2>
+<div class="dom-rule" style="background:var(--d5)"></div>
+
+<h3 id="branding">Branding, properties, and plugins</h3>
+<p><strong>System Properties &gt; Basic Configuration UI16</strong> controls the instance look, including: banner image, banner text, <strong>browser tab title</strong>, <strong>base theme</strong>, <strong>header background color</strong>, banner text color, <strong>module text color</strong>, and background and divider colors. System Properties &gt; My Company holds the company <strong>banner image</strong> and <strong>banner text</strong>.</p>
+<div class="watch"><p><strong>Watch for:</strong> default calendar, font style, startup sound, animation style, and preferred browser are not Basic Configuration UI16 settings.</p></div>
+<p>Users fix their own date and time display by setting their <strong>time zone in user preferences</strong> (gear icon). Don't change the instance time zone for one person.</p>
+<h4>Plugins</h4>
+<p>Plugins add applications or functionality. Activate them from System Definition &gt; Plugins (or All Available Applications).</p>
+<ul>
+<li>Try new features on your <strong>Personal Developer Instance</strong>, never first in production.</li>
+<li>Dependent plugins activate automatically.</li>
+<li>Most plugins <strong>cannot be deactivated</strong> once activated. Some offer demo data at activation.</li>
+</ul>
+
+<h3 id="adminsec">Admin roles, high security, and impersonation</h3>
+<div class="tbl"><table>
+<tr><th>Role</th><th>Grants</th></tr>
+<tr><td><code>admin</code> (System Administrator)</td><td>Almost all features, functions, and data. Exceptions: high security settings, plus HR and Security Operations data that need their own roles.</td></tr>
+<tr><td><code>security_admin</code></td><td>Elevated role needed to change high security settings and ACLs. Activate it with <strong>Elevate Role</strong> from the user menu.</td></tr>
+<tr><td><code>impersonator</code></td><td>Lets a non-admin impersonate users (but not admins)</td></tr>
+</table></div>
+<p>Elevation lasts for the session. To return to normal admin security, <strong>log out and back in</strong>.</p>
+<p>Common security modules: System Properties &gt; Security, System Security &gt; High Security Settings, and System Security &gt; Access Control (ACL).</p>
+<h4>Impersonation</h4>
+<ul>
+<li>Start it from the <strong>user menu in the banner</strong>. Use it to test what a user sees.</li>
+<li>Return to your own account with <strong>End Impersonation</strong>.</li>
+<li>Impersonation is logged when the <code>glide.sys.log_impersonation</code> system property is true.</li>
+</ul>
+
+<h3 id="forms">Forms, fields, and UI Policies</h3>
+<div class="tbl"><table>
+<tr><th>Tool</th><th>Open it from</th><th>Use it for</th></tr>
+<tr><td>Form Layout</td><td>Context menu &gt; Configure &gt; Form Layout</td><td>Slushbucket: add, remove, and reorder fields and sections</td></tr>
+<tr><td>Form Design</td><td>Context menu &gt; Configure &gt; Form Design</td><td>Drag-and-drop designer; can also create new fields</td></tr>
+</table></div>
+<p>Both can add fields and change field order. The Form Designer has three main parts: the <strong>page header</strong>, the <strong>field navigator</strong>, and the <strong>form layout</strong>.</p>
+<ul>
+<li><strong>Sections</strong> display as tabs (when the user has tabbed forms on) once you <strong>give the section a name</strong>.</li>
+<li>To change a field's label, right-click the label and choose <strong>Configure Label</strong>, or edit it from <strong>Configure Dictionary</strong>.</li>
+<li>Templates are opened from the form header's More options (…) icon.</li>
+</ul>
+<h4>Field types</h4>
+<div class="tbl"><table>
+<tr><th>Need</th><th>Type</th></tr>
+<tr><td>Free text with letters, numbers, special characters</td><td>String</td></tr>
+<tr><td>Drop-down of predefined options</td><td>Choice</td></tr>
+<tr><td>Look up a record in another table</td><td>Reference</td></tr>
+<tr><td>Checkbox</td><td>True/False</td></tr>
+<tr><td>Date and time</td><td>Date/Time</td></tr>
+</table></div>
+<h4>UI Policies</h4>
+<p>A UI Policy is the <strong>no-code</strong> way to make fields <strong>mandatory</strong>, <strong>read-only</strong>, or <strong>hidden</strong> based on conditions. Example: make Resolution code mandatory when State is Resolved, and hide a checkbox unless the user has a role. UI Policies run on the client, after Client Scripts, and only for form interactions.</p>
+</section>
+
+<!-- 3 -->
+<section id="collab" aria-labelledby="h-collab">
+<h2 id="h-collab">3. Configuring applications for collaboration <span class="wt">20%</span></h2>
+<div class="dom-rule" style="background:var(--d2)"></div>
+
+<h3 id="users">Users, groups, and roles</h3>
+<div class="tbl"><table>
+<tr><th>Object</th><th>Definition</th><th>Table</th></tr>
+<tr><td>User</td><td>A person who can log in</td><td><code>sys_user</code></td></tr>
+<tr><td>Group</td><td>A set of users who share a common purpose (a team)</td><td><code>sys_user_group</code></td></tr>
+<tr><td>Role</td><td>A collection of permissions</td><td><code>sys_user_role</code></td></tr>
+</table></div>
+<div class="key"><ul>
+<li>Best practice: assign roles to <strong>groups</strong>, then add users to groups.</li>
+<li>Roles can contain other roles.</li>
+<li>Setting up a new IT worker: <strong>create the user</strong>, then <strong>add them to each group</strong> whose work they'll do.</li>
+</ul></div>
+<p>If an IT user only sees self-service, they're missing the <code>itil</code> role, usually because they aren't in a group that grants it. A manager sees nothing in <strong>My Groups Work</strong> if they aren't a <em>member</em> of those groups; being listed as the group's manager doesn't count.</p>
+
+<h3 id="tasks">Tasks, assignment, and the activity stream</h3>
+<p>Task work can be assigned to <strong>users</strong> and <strong>groups</strong>. <strong>Assignment rules</strong> automatically decide which group gets which kind of task.</p>
+<p>Benefits of assigning to a group: members can pick work by SLA urgency or highest priority, and the group can route work by on-call schedule, skills, and availability.</p>
+<ul>
+<li>The <strong>Activity</strong> section (activity stream) shows the most recent updates and the history of work on a record. Use its <strong>funnel icon</strong> to show only work notes.</li>
+<li>On a list, the activity stream icon opens a frame with live updates for records you're watching.</li>
+<li><strong>My Approvals</strong>: right-click an approval in the list and choose Approve or Reject.</li>
+</ul>
+<h4>UI Actions</h4>
+<p>UI Actions add <strong>buttons, links, and context menu items</strong> to forms and lists.</p>
+<div class="tbl"><table>
+<tr><th>Form UI Actions</th><th>List UI Actions</th></tr>
+<tr><td>Form buttons, form context menu items, form links</td><td>List buttons, list context menu items, list choices, list links</td></tr>
+</table></div>
+
+<h3 id="notif">Notifications</h3>
+<p>Notifications inform users about activity. They're created in <strong>System Notification &gt; Email &gt; Notifications</strong> and can be triggered by record inserts and updates or by <strong>events</strong>.</p>
+<div class="tbl"><table>
+<tr><th>Tab</th><th>Defines</th></tr>
+<tr><td>When to send</td><td>Record inserted or updated, or event fired; conditions</td></tr>
+<tr><td>Who will receive</td><td>Users, groups, and <strong>users/groups in fields</strong>. Dot-walk from Caller to Caller.Manager to include the caller's manager.</td></tr>
+<tr><td>What it will contain</td><td>Subject, message, and an <strong>email template</strong> for reusable content like a company banner</td></tr>
+</table></div>
+
+<h3 id="reports">Reporting and Performance Analytics</h3>
+<p>Create reports from <strong>Reports &gt; View / Run</strong>, from <strong>Reports &gt; Create New</strong>, or by right-clicking a list column header.</p>
+<div class="tbl"><table>
+<tr><th>Report designer section</th><th>Purpose</th></tr>
+<tr><td>Data</td><td>Source table or report source, and filters</td></tr>
+<tr><td>Type</td><td>Visualization: list, bar, horizontal bar, pie, donut, semi-donut, speedometer, line, and more (25+)</td></tr>
+<tr><td>Configure</td><td><strong>Grouping and calculations</strong></td></tr>
+<tr><td>Style</td><td><strong>Colors, titles, legend layout</strong></td></tr>
+</table></div>
+<ul>
+<li>Click <strong>Run</strong> to see changes without saving.</li>
+<li>Best practice: copy a report before editing it, using the dropdown next to Save (<strong>Insert and Stay</strong> / Save as).</li>
+<li>Reports on Service Catalog fulfillment of a specific item use <strong>Requested Item [sc_req_item]</strong>.</li>
+<li>Pull in data from a related table with <strong>dot-walking</strong>. If the same complex data set is reused often, give users a <strong>report source</strong>. If data lives in two tables and dot-walking can't reach it, create a <strong>database view</strong>.</li>
+<li>Share reports with yourself, groups, or everyone; schedule them to be emailed; add them to dashboards.</li>
+</ul>
+<h4>Performance Analytics</h4>
+<p>Use Performance Analytics when you need data <strong>trended over time</strong> and <strong>forecast</strong> into the future, using scheduled snapshots, KPIs, and dashboards. Standard reports show the data as it is right now. Learn it through a Performance Analytics course on Now Learning.</p>
+</section>
+
+<!-- 4 -->
+<section id="self" aria-labelledby="h-self">
+<h2 id="h-self">4. Self-service and automation <span class="wt">20%</span></h2>
+<div class="dom-rule" style="background:var(--d4)"></div>
+
+<h3 id="catalog">Service Catalog</h3>
+<div class="tbl"><table>
+<tr><th>Build</th><th>When</th></tr>
+<tr><td>Catalog item</td><td>One orderable good or service. Options such as color or RAM are <strong>variables</strong>.</td></tr>
+<tr><td>Order guide</td><td>Several related items ordered together in one request (new employee: laptop, monitor, phone, business cards)</td></tr>
+<tr><td>Record producer</td><td>A catalog form that creates a record in another table, like an <strong>incident</strong> from a "Get Help" item. Skips the request and requested item.</td></tr>
+<tr><td>Variable set</td><td>A reusable group of variables added to many items (four shared mandatory fields across 80 items)</td></tr>
+</table></div>
+<p>Use <strong>Catalog Builder</strong> to create catalog items and record producers through a guided interface.</p>
+<div class="key"><ul>
+<li>Request flow: <strong>Request (REQ, sc_request) → Requested Item (RITM, sc_req_item) → Catalog Task (SCTASK, sc_task)</strong>.</li>
+<li>One request has many requested items; one requested item has many approvals and many catalog tasks.</li>
+<li>Control who can see an item with <strong>user criteria</strong> (Available for / Not available for).</li>
+<li>One item needed in two catalogs? Create it once and <strong>publish it to both catalogs</strong>.</li>
+</ul></div>
+<p>A manager approval is skipped when the requester's user record has <strong>no manager</strong>. When testing an approval flow: make sure the latest flow is active, impersonate the requester, and confirm the requester has a manager. On instances using legacy workflows, the approval threshold lives in the <strong>Service Catalog Request</strong> workflow.</p>
+
+<h3 id="flow">Flow Designer</h3>
+<p>Flows automate business logic such as approvals, tasks, notifications, and record operations with little or no code. Open it from <strong>Process Automation &gt; Flow Designer</strong>.</p>
+<ul>
+<li>A flow starts with a <strong>trigger</strong> (record, schedule, or application) and a <strong>condition</strong>.</li>
+<li><strong>Actions</strong> do the work. Common core actions: Create Record, Look Up Record, Ask for Approval, Wait for Condition.</li>
+<li>Each action's output becomes a <strong>data pill</strong>: a runtime value that stays the same for the rest of the flow. Drag data pills into later steps to reference record data.</li>
+<li>Flows handle multi-level approvals with notifications at each level.</li>
+</ul>
+<p>Advantages: less manual scripting, reduced technical debt, and smooth third-party integration through <strong>IntegrationHub spokes</strong>. Spokes are available from the <strong>ServiceNow Store</strong>. <strong>Process Automation Designer</strong> combines cross-enterprise workflows into one unified process.</p>
+
+<h3 id="kb">Knowledge Management</h3>
+<p>Knowledge Management lets the organization create, categorize, review, approve, and browse information in one shared place.</p>
+<ul>
+<li>Access is controlled with <strong>user criteria</strong> on the knowledge base's <strong>Can Read</strong> and <strong>Can Contribute</strong> lists. Articles can also have their own Can Read user criteria to narrow access further.</li>
+<li>If no access is specified, <strong>any active user</strong> can read.</li>
+<li>With <strong>Match All</strong> selected, a user must meet every condition (company AND department AND group).</li>
+<li>Importing articles requires <strong>Can Contribute</strong> access.</li>
+<li>Check a specific user's access with <strong>User Criteria Diagnostics</strong>.</li>
+<li><strong>Workflows</strong> control publishing and retiring articles. Article states: Draft, Review, Published, Retired.</li>
+<li><code>knowledge_admin</code> manages multiple knowledge bases; a knowledge manager owns a specific one.</li>
+<li>Continuous improvement: flag articles, mark helpful, rate with stars, and comment.</li>
+</ul>
+<p><strong>Virtual Agent</strong> delivers help, knowledge, and common tasks through a conversational messaging interface.</p>
+
+<h3 id="scripts">Scripting basics</h3>
+<p>A <strong>Business Rule</strong> runs on the server when a record is displayed, inserted, updated, deleted, or when a table is queried. Its <strong>When</strong> options are <strong>before</strong>, <strong>after</strong>, <strong>async</strong>, and <strong>display</strong>. A <strong>Client Script</strong> runs in the browser.</p>
+</section>
+
+<!-- 5 -->
+<section id="db" aria-labelledby="h-db">
+<h2 id="h-db">5. Database management <span class="wt">27%</span></h2>
+<div class="dom-rule" style="background:var(--d1)"></div>
+<p>The biggest domain. Spend real time here, and build tables, relationships, and ACLs in your PDI.</p>
+
+<h3 id="tables">Tables, fields, and relationships</h3>
+<p>A table holds records (rows); each <strong>field</strong> (column) holds one piece of data for a record. The primary operations on tables are <strong>create, read, write, and delete</strong>.</p>
+<div class="tbl"><table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>Core table</td><td>Ships with the platform (User, Task, Incident)</td></tr>
+<tr><td>Custom table</td><td>Created by you (<code>u_</code> prefix in global; scope prefix such as <code>x_</code> or <code>sn_hr_</code> in a scoped app)</td></tr>
+<tr><td>Base table</td><td>Not extended from any other table (Task)</td></tr>
+<tr><td>Parent table</td><td>Has tables extended from it; may itself extend another table</td></tr>
+<tr><td>Child table</td><td>Extends another table and inherits its fields</td></tr>
+</table></div>
+<p>A table can't be both core and custom. Any other combination is possible.</p>
+<p><strong>Worked example:</strong> Incident extends Task, and Super Incident extends Incident. Task is a <strong>base</strong> and <strong>parent</strong> table. Incident is both a <strong>child</strong> and a <strong>parent</strong>. Super Incident is a <strong>child</strong>.</p>
+<p>For a new app whose tickets get assigned to a team, <strong>extend Task</strong> and add your own fields, so you inherit assignment, state, and work notes.</p>
+<h4>Relationships</h4>
+<div class="tbl"><table>
+<tr><th>Relationship</th><th>Example</th></tr>
+<tr><td>One-to-many</td><td>One request has many requested items (a reference field)</td></tr>
+<tr><td>Many-to-many</td><td>Vendors sell many products; products come from many vendors. Related lists show on both tables.</td></tr>
+<tr><td>Extension</td><td>Incident extends Task</td></tr>
+<tr><td>Database view</td><td>Joins two tables for reporting</td></tr>
+</table></div>
+<ul>
+<li>Create tables with <strong>System Definition &gt; Tables</strong> or <strong>Tables &amp; Columns</strong>.</li>
+<li>See a table's relationships with the <strong>schema map</strong>: System Definition &gt; Tables, open the table, Related Links &gt; Show Schema Map.</li>
+<li>The <strong>System Dictionary</strong> defines every table and field. Dictionary overrides change a field's properties on a child table.</li>
+<li>A new custom table gets four ACLs automatically: <strong>create, read, write, delete</strong>.</li>
+</ul>
+
+<h3 id="acl">Access Controls (ACLs)</h3>
+<p>ACLs control access to records and fields for each operation: create, read, write, delete. Permissions are set with <strong>roles</strong>, <strong>conditions</strong>, and a <strong>script</strong> that sets <code>answer</code> to true or false.</p>
+<div class="tbl"><table>
+<tr><th>Name</th><th>Secures</th></tr>
+<tr><td><code>incident.None</code></td><td>All records on the table (row level)</td></tr>
+<tr><td><code>incident.*</code></td><td>All fields on the table</td></tr>
+<tr><td><code>incident.short_description</code></td><td>One field</td></tr>
+</table></div>
+<p>Let itil users create incidents: Name <code>incident.None</code>, Operation <strong>create</strong>, Role <strong>itil</strong>.</p>
+<div class="key"><ul>
+<li>Table (row) ACLs are evaluated before field ACLs, so a user must have access to the table before field access is considered.</li>
+<li>If a row rule and a field rule both apply, <strong>both must pass</strong>.</li>
+<li>Table ACLs go from specific to general: the table, then its parent table, then the wildcard (<code>*</code>).</li>
+</ul></div>
+<p>A user who can see a module but gets a blank page on Create New likely has read but not create access on that table.</p>
+
+<h3 id="policies">Data Policies</h3>
+<p>Data Policies enforce mandatory and read-only rules on the <strong>server</strong>, for every way data arrives: forms, import sets, and web services. Use them for rules like "Short description is mandatory on insert everywhere" or "Number is read-only for all users." A Data Policy can also be applied as a UI Policy on forms.</p>
+
+<h3 id="cmdb">CMDB and CSDM</h3>
+<div class="tbl"><table>
+<tr><th>Table</th><th>Role</th></tr>
+<tr><td><code>cmdb</code></td><td>Base Configuration Item table, top of the CMDB hierarchy</td></tr>
+<tr><td><code>cmdb_ci</code></td><td>Configuration Item table; CI classes extend it (cmdb_ci_server, cmdb_ci_computer)</td></tr>
+<tr><td><code>cmdb_rel_ci</code></td><td>Relationships between CIs</td></tr>
+</table></div>
+<ul>
+<li>Defining <strong>suggested relationships</strong> between CI classes makes relating CIs easier, because the platform suggests which types fit.</li>
+<li>The <strong>CI dependency view</strong> graphically shows a CI's infrastructure relationships. Hover over a connection line to see the relationship. Service desk agents use it to trace from a service to the CIs with active issues.</li>
+<li>On a CI form, <strong>Related Items</strong> shows the other CIs it's related to.</li>
+<li>Populate the CMDB with Discovery, Service Mapping, import sets, integrations, or manual entry.</li>
+</ul>
+<p>The <strong>Common Service Data Model (CSDM)</strong> is the standard, shared set of service definitions across ServiceNow products. It's the blueprint for mapping your IT services into ServiceNow and supports service-level reporting.</p>
+</section>
+
+<!-- 6 -->
+<section id="data" aria-labelledby="h-data">
+<h2 id="h-data">6. Data migration and integration <span class="wt">15%</span></h2>
+<div class="dom-rule" style="background:var(--d3)"></div>
+
+<h3 id="imports">Import Sets</h3>
+<p>Import data with the <strong>System Import Sets</strong> application. The steps are: <strong>load data</strong>, <strong>create a transform map</strong>, <strong>transform</strong>, and <strong>clean up</strong> the import set table.</p>
+<ol>
+<li><strong>Load Data</strong> (first step) brings the source into an <strong>import set row table</strong>, the staging area.</li>
+<li>A <strong>transform map</strong> defines where incoming columns go on the target table (field mapping).</li>
+<li><strong>Transform</strong> copies data from staging to the target.</li>
+</ol>
+<div class="tbl"><table>
+<tr><th>Mapping tool</th><th>When</th></tr>
+<tr><td>Automatic mapping (Auto Map Matching Fields)</td><td>Source and target field names match</td></tr>
+<tr><td>Mapping Assist</td><td>Drag-and-drop linking of source to target fields</td></tr>
+</table></div>
+<div class="key"><p><strong>Coalesce</strong> fields are the unique key. Match found: the record is updated. No match: a new record is inserted. <strong>No coalesce field</strong>: every row is inserted as new, and nothing is updated.</p></div>
+<p>Data source types: local files (CSV, Excel, XML), files on a network server (FTP, HTTP), <strong>JDBC</strong> database connections, and <strong>LDAP</strong>. Target tables can be in the current scope, in global, or in other scopes that allow write access.</p>
+<p>Best practice: plan time before importing to clean out obsolete or inaccurate data.</p>
+
+<h3 id="updatesets">Update Sets</h3>
+<p>Update sets capture configuration changes so you can move them between instances.</p>
+<ol>
+<li>Create a named update set and make it current.</li>
+<li>Make your changes, then mark the set <strong>Complete</strong>.</li>
+<li>On the target: retrieve, <strong>preview</strong>, then <strong>commit</strong>.</li>
+</ol>
+<div class="key"><ul>
+<li>Never use the <strong>Default</strong> update set to move changes between instances.</li>
+<li>Not captured by default: <strong>data records</strong>, <strong>schedules</strong>, and <strong>homepages and dashboards</strong>. Add homepages manually (Homepage Admin &gt; Pages, right-click &gt; Unload Portal Page).</li>
+<li>Keep update sets small to reduce conflicts and make changes easier to review.</li>
+<li>Moving several at once? <strong>Batch</strong> them.</li>
+<li>Data records move with XML export and import, not update sets.</li>
+</ul></div>
+</section>
+
+<section id="tablenames" aria-labelledby="h-tn">
+<h2 id="h-tn">Table names to memorize</h2>
+<p>The exam asks for exact names. Type each one followed by <code>.list</code> in your PDI.</p>
+<div class="tbl"><table>
+<tr><th>Label</th><th>Table</th></tr>
+<tr><td>User</td><td><code>sys_user</code></td></tr>
+<tr><td>Group</td><td><code>sys_user_group</code></td></tr>
+<tr><td>Role</td><td><code>sys_user_role</code></td></tr>
+<tr><td>Task</td><td><code>task</code></td></tr>
+<tr><td>Request / Requested Item / Catalog Task</td><td><code>sc_request</code> / <code>sc_req_item</code> / <code>sc_task</code></td></tr>
+<tr><td>Catalog Item</td><td><code>sc_cat_item</code></td></tr>
+<tr><td>Base CI / CI / CI relationship</td><td><code>cmdb</code> / <code>cmdb_ci</code> / <code>cmdb_rel_ci</code></td></tr>
+<tr><td>System Properties / Business Rules / Client Scripts</td><td><code>sys_properties</code> / <code>sys_script</code> / <code>sys_script_client</code></td></tr>
+<tr><td>Dictionary</td><td><code>sys_dictionary</code></td></tr>
+</table></div>
+</section>
+
+<section id="recall" aria-labelledby="h-recall">
+<h2 id="h-recall">Rapid-fire recall</h2>
+<p>Say the answer out loud, then open it to check.</p>
+<div class="actions"><button type="button" id="openAll">Show all</button><button type="button" id="closeAll">Hide all</button></div>
+<div class="recall-top">
+<details class="rec"><summary>Three parts of a filter condition?</summary><p>Field, operator, value.</p></details>
+<details class="rec"><summary>Column search for "contains"?</summary><p>Start the term with <code>*</code>.</p></details>
+<details class="rec"><summary>Where do you turn on the update set picker?</summary><p>The gear icon (user preferences).</p></details>
+<details class="rec"><summary>Role needed for high security settings, and how do you drop it?</summary><p>security_admin, elevated for the session. Log out and back in.</p></details>
+<details class="rec"><summary>How do you return from impersonation?</summary><p>End Impersonation from the user menu.</p></details>
+<details class="rec"><summary>Group vs. role?</summary><p>A group is a set of users; a role is a collection of permissions. Assign roles to groups.</p></details>
+<details class="rec"><summary>Report designer section for grouping? For colors and titles?</summary><p>Configure. Style.</p></details>
+<details class="rec"><summary>Trend and forecast data over time?</summary><p>Performance Analytics.</p></details>
+<details class="rec"><summary>Laptop, phone, and badge in one request?</summary><p>Order guide.</p></details>
+<details class="rec"><summary>Catalog form that creates an incident?</summary><p>Record producer.</p></details>
+<details class="rec"><summary>Same four variables on 80 items?</summary><p>One variable set added to every item.</p></details>
+<details class="rec"><summary>Why would a manager approval be skipped for one requester?</summary><p>The requester's user record has no manager.</p></details>
+<details class="rec"><summary>Where does action output live in a flow?</summary><p>In data pills.</p></details>
+<details class="rec"><summary>Knowledge base with no user criteria: who can read?</summary><p>Any active user.</p></details>
+<details class="rec"><summary>Tool to check one user's knowledge access?</summary><p>User Criteria Diagnostics.</p></details>
+<details class="rec"><summary>Business Rule When options?</summary><p>Before, after, async, display.</p></details>
+<details class="rec"><summary>ACL to let itil users create incidents?</summary><p><code>incident.None</code>, operation create, role itil.</p></details>
+<details class="rec"><summary>No-code mandatory field on forms only? On all data entry?</summary><p>UI Policy. Data Policy.</p></details>
+<details class="rec"><summary>Three key CMDB tables?</summary><p>cmdb, cmdb_ci, cmdb_rel_ci.</p></details>
+<details class="rec"><summary>Blueprint for mapping IT services into ServiceNow?</summary><p>CSDM.</p></details>
+<details class="rec"><summary>Import steps in order?</summary><p>Load data, create transform map, transform, clean up.</p></details>
+<details class="rec"><summary>What happens with no coalesce field?</summary><p>Every row is inserted as a new record.</p></details>
+<details class="rec"><summary>Three things not in an update set by default?</summary><p>Data records, schedules, and homepages/dashboards.</p></details>
+<details class="rec"><summary>Moving several update sets at once?</summary><p>Batch them.</p></details>
+</div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  var all=function(open){document.querySelectorAll('details.rec').forEach(function(d){d.open=open;});};
+  document.getElementById('openAll').addEventListener('click',function(){all(true);});
+  document.getElementById('closeAll').addEventListener('click',function(){all(false);});
+  window.addEventListener('beforeprint',function(){all(true);});
+})();
+</script>
+</body>
+</html>
