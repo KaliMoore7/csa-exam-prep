@@ -129,7 +129,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
   .tbl,.key,.watch,pre{break-inside:avoid}
   details.rec{display:block} details.rec p{display:block}
 }
-@media print{main{max-width:none!important;padding:0!important}body{font-size:13px;line-height:1.5}section{margin-top:22px}h1{font-size:28px}.week{break-inside:avoid}}
+@media print{main{max-width:none!important;padding:0!important}body{font-size:13px;line-height:1.5}section{margin-top:22px}h1{font-size:28px}}
 </style>
 </head>
 <body>
@@ -140,7 +140,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <li><a href="#start">Before you start</a></li>
 <li><a href="#runs">Client vs. server</a></li>
 <li><a href="#nav">1. Platform overview &amp; navigation</a></li>
-<li class="sub"><a href="#ui">Interfaces &amp; the banner</a></li>
+<li class="sub"><a href="#ui">Interfaces &amp; the header</a></li>
 <li class="sub"><a href="#lists">Lists &amp; filters</a></li>
 <li><a href="#inst">2. Instance configuration</a></li>
 <li class="sub"><a href="#branding">Branding &amp; plugins</a></li>
@@ -165,14 +165,13 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <li class="sub"><a href="#imports">Import Sets</a></li>
 <li class="sub"><a href="#updatesets">Update Sets</a></li>
 <li><a href="#tablenames">Table names to memorize</a></li>
-<li><a href="#recall">Rapid-fire recall</a></li>
+<li><a href="#recall">Off the top of your head</a></li>
 </ol>
 </nav>
 
 <main>
 <header class="hero" id="start">
 <h1>ServiceNow Certified System Administrator study guide</h1>
-<p class="lede">Organized by the CSA exam blueprint, with the distinctions the exam actually tests: which module, which table, which role, and which tempting answer is wrong.</p>
 <div class="weights" aria-label="Exam domain weights">
 <div class="wbar" aria-hidden="true">
 <span style="flex:7;background:var(--d6)"></span><span style="flex:11;background:var(--d5)"></span><span style="flex:20;background:var(--d2)"></span><span style="flex:20;background:var(--d4)"></span><span style="flex:27;background:var(--d1)"></span><span style="flex:15;background:var(--d3)"></span>
@@ -186,7 +185,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <li><i style="background:var(--d3)"></i>Data migration &amp; integration<b>15%</b></li>
 </ul>
 </div>
-<p class="small">60 questions in 90 minutes. Database Management alone is more than a quarter of the exam. Expect "choose two" and "choose three" questions; select exactly that many. Confirm the current blueprint on ServiceNow University before you book.</p>
+<p class="small">60 questions in 90 minutes. Database Management alone is more than a quarter of the exam. Expect "choose two" and "choose three" questions; select exactly that many. Use this guide after completing the ServiceNow Administration Fundamentals (SNAF) course on ServiceNow University.</p>
 </header>
 
 <section aria-labelledby="h-how">
@@ -217,32 +216,48 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <div class="dom-rule" style="background:var(--d6)"></div>
 <p>ServiceNow is a cloud platform. Scripting uses <strong>JavaScript</strong>. Response time for a user is the <strong>round trip</strong> between client and server: a <strong>request</strong> plus a <strong>response</strong>.</p>
 
-<h3 id="ui">Interfaces and the banner</h3>
-<p>The platform includes three main interfaces: the <strong>Now Platform user interface</strong> (UI16 / Next Experience), <strong>Service Portal</strong>, and the <strong>Now Mobile</strong> apps.</p>
+<h3 id="ui">Interfaces and the Unified Navigation header</h3>
+<p>ServiceNow is a cloud-based <strong>Application Platform as a Service (aPaaS)</strong> made of three parts: a single enterprise-wide database, a suite of applications, and a development environment. Each <strong>instance</strong> is a full, stand-alone copy of the platform with its own URL. ServiceNow uses a <strong>single-tenant</strong> architecture, so no part of an instance, including the database, is shared with other customers. Companies usually run several instances (Dev, Test, Prod): changes are deployed up the stack and clones copy down it. A <strong>Personal Developer Instance (PDI)</strong> is a free instance for learning and demos.</p>
+<p>The main interfaces are the <strong>Now Platform user interface</strong>, <strong>Service Portal</strong>, and the <strong>Now Mobile</strong> apps. The current platform UI is the <strong>Next Experience</strong>, and its main menu bar is the <strong>Unified Navigation header</strong>. An instance with no changes is called a <strong>baseline</strong> implementation.</p>
 <div class="tbl"><table>
-<tr><th>Banner item</th><th>What it does</th></tr>
-<tr><td>Instance logo</td><td>Returns you to your home page</td></tr>
-<tr><td>Global search</td><td>Searches across the instance</td></tr>
-<tr><td>Connect (chat bubbles)</td><td>Opens Connect chat. The full-screen view is <strong>Connect &gt; Connect Workspace</strong>.</td></tr>
-<tr><td>Help (question mark)</td><td>Help panel: guided tours, docs, and help on inputs and outputs in a flow</td></tr>
-<tr><td>Gear (settings)</td><td>User preferences: theme, <strong>time zone</strong>, and turning on the <strong>application picker</strong> and <strong>update set picker</strong></td></tr>
-<tr><td>User menu</td><td><strong>Impersonate user</strong>, Elevate role, Log out</td></tr>
+<tr><th>Header item</th><th>What it does</th></tr>
+<tr><td>All</td><td>Opens the <strong>Application Navigator</strong>: applications, their categories, and modules</td></tr>
+<tr><td>Favorites</td><td>Items you've marked as favorites</td></tr>
+<tr><td>History</td><td>Pages you've recently visited, newest first (30 by default)</td></tr>
+<tr><td>Workspaces</td><td>Single-page workspaces built for a specific kind of work</td></tr>
+<tr><td>Admin</td><td>Modules for users with the admin role</td></tr>
+<tr><td>Contextual app pill</td><td>Shows the title of the page you're on; its star adds it to Favorites</td></tr>
+<tr><td>Global search</td><td>Searches keywords and identifiers across applications and records</td></tr>
+<tr><td>Globe icon</td><td>The <strong>application scope picker</strong> and <strong>update set picker</strong>: see and switch your current application and update set</td></tr>
+<tr><td>Discussions (chat bubbles)</td><td>Opens the Discussions sidebar so users can communicate and collaborate</td></tr>
+<tr><td>Embedded help (question mark)</td><td>Context-sensitive help and articles for where you are, including guided tours</td></tr>
+<tr><td>Notifications (bell)</td><td>Notification settings: how and when you're notified</td></tr>
+<tr><td>User menu (avatar)</td><td>Profile, <strong>Preferences</strong> (theme, <strong>time zone</strong>), <strong>Impersonate user</strong>, <strong>Elevate role</strong>, and Log out</td></tr>
 </table></div>
 
 <h4>Application Navigator</h4>
 <ul>
-<li><strong>Applications</strong> are top-level menus; <strong>modules</strong> are the links inside them.</li>
-<li><strong>Favorites</strong> (star): create them by dragging a record or list into the navigator, or from a form's additional actions menu. Edit a favorite's label with the <strong>pencil</strong> icon.</li>
-<li><strong>History</strong> (clock): return to something you viewed recently.</li>
-<li>Type in the filter box to narrow the navigator. <code>table_name.list</code> opens a list; <code>table_name.form</code> or <code>table_name.do</code> opens a new form; typing it in capitals opens a new tab.</li>
+<li>Each <strong>application</strong> contains categories and <strong>modules</strong>, the links that open screens and tools.</li>
+<li><strong>Favorites:</strong> create them from a list's List controls menu or a form's Additional actions menu (<strong>Create Favorite</strong>), or with the star on the contextual app pill. Edit a favorite's label with the <strong>pencil</strong> icon.</li>
+<li>Type in the navigator filter for shortcuts: <code>table_name.list</code> opens the list, <code>table_name.form</code> opens a new form, and <code>table_name.filter</code> opens the list without running the query, which is handy for large tables. Typing the suffix in capitals (<code>.LIST</code>, <code>.FORM</code>, <code>.FILTER</code>) opens it in a new browser tab.</li>
 </ul>
+<p>Screen types you'll see: <strong>list views</strong> (many records), <strong>form views</strong> (one record), <strong>workspaces</strong>, <strong>dashboards</strong> (reports and Performance Analytics widgets on one screen), <strong>knowledge articles</strong>, and the <strong>Service Catalog</strong>.</p>
 
-<h4>Form header icons</h4>
-<ul>
-<li><strong>Additional actions</strong> (three-bar icon, sometimes called the hamburger): the form context menu. You can also right-click the header.</li>
-<li><strong>More options (…)</strong>: tags, and toggling the template bar.</li>
-<li>Paperclip: attachments.</li>
-</ul>
+<h4>Form header</h4>
+<div class="tbl"><table>
+<tr><th>Item</th><th>What it does</th></tr>
+<tr><td>Additional actions (three lines)</td><td>The form context menu: <strong>Save</strong>, <strong>Insert</strong>, <strong>Insert and Stay</strong>, Configure, Export, View, Create Favorite, Copy URL, Copy sys_id, Show XML, History, Reload form. You can also right-click the header.</td></tr>
+<tr><td>Paperclip</td><td>Manage attachments: add, delete, download</td></tr>
+<tr><td>More options (…)</td><td>Toggle the <strong>template bar</strong> and toggle annotations</td></tr>
+<tr><td>UI Action buttons</td><td>Actions on the record, such as Update and Delete</td></tr>
+<tr><td>Previous / Next arrows</td><td>Step through records when the form was opened from a list</td></tr>
+</table></div>
+<div class="key"><ul>
+<li><strong>Insert</strong> and <strong>Insert and Stay</strong> create a new record as a copy of the one on screen. Insert closes the form; Insert and Stay leaves the copy open.</li>
+<li>Saving: <strong>Save</strong> keeps the form open. <strong>Update</strong> saves an existing record and closes the form. <strong>Submit</strong> saves a new record and closes the form. Changes aren't saved until you do one of these.</li>
+<li><strong>Templates</strong> fill a group of fields from saved values. Open the template bar from More options (…).</li>
+<li><strong>Related lists</strong> at the bottom of a form show records in other tables with a one-to-many relationship to this record, such as a user's roles and groups.</li>
+</ul></div>
 
 <h3 id="lists">Lists and filters</h3>
 <p>A <strong>list</strong> shows many records; each row is a record and each <strong>column is a field</strong>. A <strong>form</strong> shows one record.</p>
@@ -258,8 +273,24 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <tr><td>Breadcrumbs</td><td>Click a breadcrumb to remove the conditions after it</td></tr>
 <tr><td>Natural Language Query</td><td>Type a plain-language phrase to filter the list</td></tr>
 </table></div>
+<h4>List view tools</h4>
+<div class="tbl"><table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td>List controls menu (three lines)</td><td>Switch views, apply saved filters, Group By, Show (rows per page), Refresh List, Create Favorite</td></tr>
+<tr><td>Filter icon (funnel)</td><td>Opens the <strong>condition builder</strong> (Run, Save, AND, OR, Add Sort)</td></tr>
+<tr><td>List search / column search bar</td><td>Narrow results by field; the magnifier toggles the column search bar</td></tr>
+<tr><td>List personalization (gear)</td><td>Choose which columns <em>you</em> see, plus wrap text, compact rows, list editing</td></tr>
+<tr><td>Actions on selected rows</td><td>Act on the records whose checkboxes are selected</td></tr>
+<tr><td>Column options menu (three dots on a header)</td><td>Sort, Group By, <strong>Bar Chart</strong>, <strong>Pie Chart</strong>, Configure, Import, Export, Update Selected, Update All</td></tr>
+<tr><td>List fields menu (right-click a cell)</td><td>Show Matching, Filter Out, Copy URL, Copy sys_id, <strong>Assign Tag</strong></td></tr>
+<tr><td>Inline editing</td><td>Double-click a cell to edit it from the list</td></tr>
+<tr><td>Pagination controls</td><td>Total count and page-by-page navigation</td></tr>
+</table></div>
+<p><strong>Personalize</strong> (gear) changes only your view. <strong>Configure &gt; List Layout</strong> changes the list for everyone.</p>
 <h4>Context menus and tags</h4>
-<p>Open a context menu by <strong>right-clicking</strong> a list, form header, or column heading, or by clicking the <strong>context menu icon</strong>. Tags can be added from More options (…) &gt; Add Tag. Tag visibility can be <strong>Everyone</strong>, <strong>Groups and users</strong>, or <strong>Me</strong>.</p>
+<p>Open a context menu by <strong>right-clicking</strong> a list, form header, or column heading, or by clicking its menu icon. Add a tag by right-clicking a record in a list and choosing <strong>Assign Tag</strong>. Tag visibility can be <strong>Everyone</strong>, <strong>Groups and users</strong>, or <strong>Me</strong>.</p>
+<h4>Dot-walking</h4>
+<p>A <strong>reference field</strong> stores another record's <strong>sys_id</strong> (a foreign key). <strong>Dot-walking</strong> follows those references to reach related data, for example from an incident to the caller's department name. You can dot-walk in the condition builder, list personalization and list layout, report builders, notification recipients, and scripts (<code>current.caller_id.department.name</code>).</p>
 </section>
 
 <!-- 2 -->
@@ -270,7 +301,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <h3 id="branding">Branding, properties, and plugins</h3>
 <p><strong>System Properties &gt; Basic Configuration UI16</strong> controls the instance look, including: banner image, <strong>browser tab title</strong>, <strong>base theme</strong>, <strong>header background color</strong>, banner text color, <strong>module text color</strong>, and background and divider colors. System Properties &gt; My Company holds the company <strong>banner image</strong> and <strong>banner text</strong>.</p>
 <div class="watch"><p><strong>Watch for:</strong> default calendar, font style, startup sound, animation style, and preferred browser are not Basic Configuration UI16 settings.</p></div>
-<p>Users fix their own date and time display by setting their <strong>time zone in user preferences</strong> (gear icon). Don't change the instance time zone for one person.</p>
+<p>Users fix their own date and time display by setting their <strong>time zone</strong> in <strong>user menu &gt; Preferences</strong>. Don't change the instance time zone for one person.</p>
 <h4>Plugins</h4>
 <p>Plugins add applications or functionality. Activate them from System Definition &gt; Plugins (or All Available Applications).</p>
 <ul>
@@ -286,7 +317,11 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <tr><td><code>security_admin</code></td><td>Elevated role needed to change high security settings and ACLs. Activate it with <strong>Elevate Role</strong> from the user menu.</td></tr>
 <tr><td><code>impersonator</code></td><td>Lets a non-admin impersonate other users, but not admin users</td></tr>
 </table></div>
-<p>Elevation lasts for the session. To return to normal admin security, <strong>log out and back in</strong>.</p>
+<p>Elevation lasts only for your current session. You can drop it two ways:</p>
+<ul>
+<li><strong>Uncheck the role:</strong> click your user profile icon (avatar) in the top-right corner, select <strong>Elevate Role</strong>, uncheck <strong>security_admin</strong>, and click <strong>Update</strong> (or OK).</li>
+<li><strong>Log out:</strong> log out and log back in, or wait for the session to time out. Elevated privileges reset automatically when the session ends.</li>
+</ul>
 <p>Common security modules: System Properties &gt; Security, System Security &gt; High Security Settings, and System Security &gt; Access Control (ACL).</p>
 <h4>Impersonation</h4>
 <ul>
@@ -306,6 +341,7 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <li><strong>Sections</strong> display as tabs (when the user has tabbed forms on) once you <strong>give the section a name</strong>.</li>
 <li>To change a field's label, right-click the label and choose <strong>Configure Label</strong>, or edit it from <strong>Configure Dictionary</strong>.</li>
 <li>Templates are opened from the form header's More options (…) icon.</li>
+<li><strong>Form Layout</strong> is the traditional slushbucket tool; <strong>Form Design</strong> is the drag-and-drop (WYSIWYG) designer. Both build form <strong>views</strong>, which can differ by persona.</li>
 </ul>
 <h4>Field types</h4>
 <div class="tbl"><table>
@@ -334,7 +370,10 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 </table></div>
 <div class="key"><ul>
 <li>Best practice: assign roles to <strong>groups</strong>, then add users to groups.</li>
-<li>Roles can contain other roles.</li>
+<li>Roles can contain other roles, and groups can contain other groups.</li>
+<li>Relationship tables: Group Member [<code>sys_user_grmember</code>] links users to groups, Group Role [<code>sys_group_has_role</code>] links groups to roles, and User Role [<code>sys_user_has_role</code>] links users directly to roles (possible but not recommended).</li>
+<li>A <strong>persona</strong> (requester, fulfiller, approver) describes a user by the work they do. Personas are implemented with roles.</li>
+<li>Manage users, groups, and roles in the <strong>User Administration</strong> application.</li>
 <li>Setting up a new IT worker: <strong>create the user</strong>, then <strong>add them to each group</strong> whose work they'll do.</li>
 </ul></div>
 <p>If an IT user only sees self-service, they're missing the <code>itil</code> role, usually because they aren't in a group that grants it. A manager sees nothing in <strong>My Groups Work</strong> if they aren't a <em>member</em> of those groups; being listed as the group's manager doesn't count.</p>
@@ -394,12 +433,23 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <tr><td>Catalog item</td><td>One orderable good or service. Options such as color or RAM are <strong>variables</strong>.</td></tr>
 <tr><td>Order guide</td><td>Several related items ordered together in one request (new employee: laptop, monitor, phone, business cards)</td></tr>
 <tr><td>Record producer</td><td>A catalog form that creates a record in another table, like an <strong>incident</strong> from a "Get Help" item. Skips the request and requested item.</td></tr>
+<tr><td>Content item</td><td>A catalog item that provides information (for example, a link or article) instead of a good or service</td></tr>
 <tr><td>Variable set</td><td>A reusable group of variables added to many items (four shared mandatory fields across 80 items)</td></tr>
 </table></div>
-<p>Use <strong>Catalog Builder</strong> to create catalog items and record producers through a guided interface.</p>
+<p>Structure: a <strong>Catalog</strong> [<code>sc_catalog</code>] contains <strong>Categories</strong> [<code>sc_category</code>], which can have subcategories, and categories hold <strong>Catalog Items</strong> [<code>sc_cat_item</code>]. A company can have many catalogs. Shoppers use <strong>Self-Service &gt; Service Catalog</strong>; admins use the <strong>Service Catalog</strong> application.</p>
+<p>Use <strong>Catalog Builder</strong> to create and publish catalog items and record producers from <strong>templates</strong> (a template is a set of pre-made decisions that simplifies building an item).</p>
+<div class="tbl"><table>
+<tr><th>Role</th><th>Can do</th></tr>
+<tr><td><code>admin</code></td><td>Everything in the Service Catalog, including related scripting (business rules, UI macros)</td></tr>
+<tr><td><code>catalog_admin</code></td><td>Fully manage the Service Catalog application, without the scripting functions</td></tr>
+<tr><td><code>catalog_manager</code></td><td>Update a specific catalog they manage and assign its editors and managers</td></tr>
+<tr><td><code>catalog_editor</code></td><td>Edit a specific catalog and its categories and items</td></tr>
+<tr><td><code>catalog_builder_editor</code></td><td>Create and maintain items in Catalog Builder using templates</td></tr>
+</table></div>
 <div class="key"><ul>
 <li>Request flow: <strong>Request (REQ, sc_request) → Requested Item (RITM, sc_req_item) → Catalog Task (SCTASK, sc_task)</strong>.</li>
 <li>One request has many requested items; one requested item has many approvals and many catalog tasks.</li>
+<li>When every catalog task for a requested item is complete, the requested item closes. When every requested item is complete, the request closes.</li>
 <li>Control who can see an item with <strong>user criteria</strong> (Available for / Not available for).</li>
 <li>One item needed in two catalogs? Create it once and <strong>publish it to both catalogs</strong>.</li>
 </ul></div>
@@ -425,7 +475,9 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <li>Check a specific user's access with <strong>User Criteria Diagnostics</strong>.</li>
 <li><strong>Workflows</strong> control publishing and retiring articles. Article states: Draft, Review, Published, Retired.</li>
 <li><code>knowledge_admin</code> manages multiple knowledge bases; a knowledge manager owns a specific one.</li>
-<li>Continuous improvement: flag articles, mark helpful, rate with stars, and comment.</li>
+<li>Structure: a <strong>Knowledge Base</strong> [<code>kb_knowledge_base</code>] has an <strong>owner</strong> and a <strong>publish</strong> and <strong>retire workflow</strong>. It is divided into <strong>categories</strong> [<code>kb_category</code>]; a category belongs to one knowledge base. Each <strong>article</strong> [<code>kb_knowledge</code>] belongs to one knowledge base and one category.</li>
+<li>Articles can include formatted text, images, video, and code, and can be written in the editor or imported from a Word document.</li>
+<li>Feedback and continuous improvement: star ratings, helpful votes, comments, flagging an article, and creating an incident from an article.</li>
 </ul>
 <p><strong>Virtual Agent</strong> delivers help, knowledge, and common tasks through a conversational messaging interface.</p>
 
@@ -463,12 +515,14 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <ul>
 <li>Create tables with <strong>System Definition &gt; Tables</strong> or <strong>Tables &amp; Columns</strong>.</li>
 <li>See a table's relationships with the <strong>schema map</strong>: System Definition &gt; Tables, open the table, Related Links &gt; Show Schema Map.</li>
-<li>The <strong>System Dictionary</strong> defines every table and field. Dictionary overrides change a field's properties on a child table.</li>
+<li><strong>Dictionary tables</strong> describe the database itself: Table [<code>sys_db_object</code>] has a record for every table, and Dictionary Entry [<code>sys_dictionary</code>] has a record for every field. Dictionary overrides change a field's properties on a child table.</li>
+<li>Every table and field has a <strong>name</strong> (used in code, no spaces) and a <strong>label</strong> (shown in the UI).</li>
+<li><strong>sys_id</strong> is the primary key on nearly every table. A reference field stores another table's sys_id.</li>
 <li>A new custom table gets four ACLs automatically: <strong>create, read, write, delete</strong>.</li>
 </ul>
 
 <h3 id="acl">Access Controls (ACLs)</h3>
-<p>ACLs control access to records and fields for each operation: create, read, write, delete. Permissions are set with <strong>roles</strong>, <strong>conditions</strong>, and a <strong>script</strong> that sets <code>answer</code> to true or false.</p>
+<p>ServiceNow is <strong>deny-first</strong>: ACLs don't deny access, they <strong>grant</strong> it under set conditions. ACLs are stored in Access Control [<code>sys_security_acl</code>] and managed in the <strong>System Security</strong> application. They mainly protect records and fields for each operation (create, read, write, delete), and can also protect UI pages, client-callable scripts, and processors. Permissions are set with <strong>roles</strong>, <strong>conditions</strong>, and a <strong>script</strong> that sets <code>answer</code> to true or false. Creating or changing an ACL requires elevating to <code>security_admin</code>.</p>
 <div class="tbl"><table>
 <tr><th>Name</th><th>Secures</th></tr>
 <tr><td><code>incident.None</code></td><td>All records on the table (row level)</td></tr>
@@ -492,12 +546,16 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <tr><td><code>cmdb</code></td><td>Base Configuration Item table, top of the CMDB hierarchy</td></tr>
 <tr><td><code>cmdb_ci</code></td><td>Configuration Item table; CI classes extend it (cmdb_ci_server, cmdb_ci_computer)</td></tr>
 <tr><td><code>cmdb_rel_ci</code></td><td>Relationships between CIs</td></tr>
+<tr><td><code>cmdb_rel_type</code></td><td>The relationship types, such as Depends on::Used by</td></tr>
 </table></div>
 <ul>
 <li>Defining <strong>suggested relationships</strong> between CI classes makes relating CIs easier, because the platform suggests which types fit.</li>
 <li>The <strong>CI dependency view</strong> graphically shows a CI's infrastructure relationships. Right-click a relationship line and choose <strong>View Relationship Form</strong>; right-click a CI for options like View Form and View Related Tasks. Service desk agents use it to trace from a service to the CIs with active issues.</li>
 <li>On a CI form, <strong>Related Items</strong> shows the other CIs it's related to.</li>
-<li>Populate the CMDB with Discovery, Service Mapping, import sets, integrations, or manual entry.</li>
+<li>Three ways to populate the CMDB: <strong>manual entry</strong> (always needed sometimes, but slow and error-prone), <strong>integrations</strong> that import data, and <strong>automated discovery</strong> (ServiceNow Discovery, Service Mapping, or third-party tools such as Microsoft SCCM). Each defined source is a <strong>discovery source</strong>.</li>
+<li>The <strong>Identification and Reconciliation Engine (IRE)</strong> uses identification rules and reconciliation (data precedence) rules to match incoming CIs and prevent duplicates. Identification rules say which attributes uniquely identify a CI; reconciliation rules say which source is trusted at the record and field level.</li>
+<li><strong>CI Class Manager</strong> is the main tool for CMDB classes (a class is a CMDB table) and IRE rules.</li>
+<li><strong>CMDB Data Manager</strong> creates and manages CI policies. The <strong>CMDB Health Dashboard</strong> measures Completeness, Compliance, and Correctness. <strong>CMDB Query Builder</strong> queries CIs and relationships with drag and drop.</li>
 </ul>
 <p>The <strong>Common Service Data Model (CSDM)</strong> is the standard, shared set of service definitions across ServiceNow products. It's the blueprint for mapping your IT services into ServiceNow and supports service-level reporting.</p>
 </section>
@@ -517,10 +575,18 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <div class="tbl"><table>
 <tr><th>Mapping tool</th><th>When</th></tr>
 <tr><td>Automatic mapping (Auto Map Matching Fields)</td><td>Source and target field names match</td></tr>
-<tr><td>Mapping Assist</td><td>Drag-and-drop linking of source to target fields</td></tr>
+<tr><td>Mapping Assist</td><td>Map source fields to target fields yourself in a slushbucket-style interface</td></tr>
 </table></div>
 <div class="key"><p><strong>Coalesce</strong> fields are the unique key. Match found: the record is updated. No match: a new record is inserted. <strong>No coalesce field</strong>: every row is inserted as new, and nothing is updated.</p></div>
-<p>Data source types: local files (CSV, Excel, XML), files on a network server (FTP, HTTP), <strong>JDBC</strong> database connections, and <strong>LDAP</strong>. Target tables can be in the current scope, in global, or in other scopes that allow write access.</p>
+<p>A <strong>data source</strong> [<code>sys_data_source</code>] tells the platform how to connect to external data and load it into an import set table. Types include files (CSV, Excel, XML, local or from a network server), <strong>JDBC</strong>, <strong>LDAP</strong>, and <strong>REST</strong>. Target tables can be in the current scope, in global, or in other scopes that allow write access.</p>
+<div class="tbl"><table>
+<tr><th>Record</th><th>Table</th><th>Purpose</th></tr>
+<tr><td>Data source</td><td><code>sys_data_source</code></td><td>Where and how to get the data</td></tr>
+<tr><td>Transform map</td><td><code>sys_transform_map</code></td><td>Import set table to target table</td></tr>
+<tr><td>Field map</td><td><code>sys_transform_entry</code></td><td>Field-by-field mapping inside a transform map</td></tr>
+<tr><td>Scheduled data import</td><td><code>scheduled_data_import</code></td><td>Runs an import automatically on a schedule</td></tr>
+</table></div>
+<p>A <strong>robust transform</strong> is a more advanced transform used mainly for the CMDB: it can load several target tables and create relationships between the imported records.</p>
 <p>Best practice: plan time before importing to clean out obsolete or inaccurate data.</p>
 
 <h3 id="updatesets">Update Sets</h3>
@@ -552,19 +618,28 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <tr><td>Catalog Item</td><td><code>sc_cat_item</code></td></tr>
 <tr><td>Base CI / CI / CI relationship</td><td><code>cmdb</code> / <code>cmdb_ci</code> / <code>cmdb_rel_ci</code></td></tr>
 <tr><td>System Properties / Business Rules / Client Scripts</td><td><code>sys_properties</code> / <code>sys_script</code> / <code>sys_script_client</code></td></tr>
-<tr><td>Dictionary</td><td><code>sys_dictionary</code></td></tr>
+<tr><td>Group Member / Group Role / User Role</td><td><code>sys_user_grmember</code> / <code>sys_group_has_role</code> / <code>sys_user_has_role</code></td></tr>
+<tr><td>Table / Dictionary Entry</td><td><code>sys_db_object</code> / <code>sys_dictionary</code></td></tr>
+<tr><td>Access Control</td><td><code>sys_security_acl</code></td></tr>
+<tr><td>Catalog / Category</td><td><code>sc_catalog</code> / <code>sc_category</code></td></tr>
+<tr><td>Knowledge / Knowledge Base / Category</td><td><code>kb_knowledge</code> / <code>kb_knowledge_base</code> / <code>kb_category</code></td></tr>
+<tr><td>CI relationship type</td><td><code>cmdb_rel_type</code></td></tr>
+<tr><td>Data source / Transform map / Field map</td><td><code>sys_data_source</code> / <code>sys_transform_map</code> / <code>sys_transform_entry</code></td></tr>
 </table></div>
 </section>
 
 <section id="recall" aria-labelledby="h-recall">
-<h2 id="h-recall">Rapid-fire recall</h2>
+<h2 id="h-recall">Off the top of your head</h2>
 <p>Say the answer out loud, then open it to check.</p>
 <div class="actions"><button type="button" id="openAll">Show all</button><button type="button" id="closeAll">Hide all</button></div>
 <div class="recall-top">
+<details class="rec"><summary>Insert vs. Insert and Stay?</summary><p>Both create a copy of the current record. Insert closes the form; Insert and Stay keeps the copy open.</p></details>
+<details class="rec"><summary>Which table holds a record for every table? For every field?</summary><p>sys_db_object for tables, sys_dictionary for fields.</p></details>
+<details class="rec"><summary>Open a big table's list without running the query?</summary><p>Type table_name.filter in the navigator.</p></details>
 <details class="rec"><summary>Three parts of a filter condition?</summary><p>Field, operator, value.</p></details>
 <details class="rec"><summary>Column search for "contains"?</summary><p>Start the term with <code>*</code>.</p></details>
-<details class="rec"><summary>Where do you turn on the update set picker?</summary><p>The gear icon (user preferences).</p></details>
-<details class="rec"><summary>Role needed for high security settings, and how do you drop it?</summary><p>security_admin, elevated for the session. Log out and back in.</p></details>
+<details class="rec"><summary>Where do you find the update set picker?</summary><p>The globe icon in the banner.</p></details>
+<details class="rec"><summary>Role needed for high security settings, and how do you drop it?</summary><p>security_admin, elevated for the session. Drop it two ways: open your user profile icon (avatar) &gt; Elevate Role, uncheck security_admin, and click Update (or OK); or log out and back in, or let the session time out. Elevated privileges reset when the session ends.</p></details>
 <details class="rec"><summary>How do you return from impersonation?</summary><p>End Impersonation from the user menu.</p></details>
 <details class="rec"><summary>Group vs. role?</summary><p>A group is a set of users; a role is a collection of permissions. Assign roles to groups.</p></details>
 <details class="rec"><summary>Report designer section for grouping? For colors and titles?</summary><p>Configure. Style.</p></details>
@@ -581,7 +656,6 @@ details.rec p{margin:0 0 14px 2.1em;color:var(--ink)}
 <details class="rec"><summary>No-code mandatory field on forms only? On all data entry?</summary><p>UI Policy. Data Policy.</p></details>
 <details class="rec"><summary>Three key CMDB tables?</summary><p>cmdb, cmdb_ci, cmdb_rel_ci.</p></details>
 <details class="rec"><summary>Blueprint for mapping IT services into ServiceNow?</summary><p>CSDM.</p></details>
-<details class="rec"><summary>Import steps in order?</summary><p>Load data, create transform map, transform, clean up.</p></details>
 <details class="rec"><summary>What happens with no coalesce field?</summary><p>Every row is inserted as a new record.</p></details>
 <details class="rec"><summary>Two things not in an update set by default?</summary><p>Data records and homepages.</p></details>
 <details class="rec"><summary>Moving several update sets at once?</summary><p>Batch them.</p></details>
